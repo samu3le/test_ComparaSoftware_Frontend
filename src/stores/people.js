@@ -38,6 +38,7 @@ export const usePeopleStore = defineStore(`${MODEL}-store`, () => {
       {
         label: "Tipo de documento",
         field: "type_document",
+        type: "callback",
       },
       {
         label: "Documento",
@@ -54,6 +55,7 @@ export const usePeopleStore = defineStore(`${MODEL}-store`, () => {
       {
         label: "Genero",
         field: "gender",
+        type: "callback",
       },
       {
         label: "Fecha de nacimiento",
@@ -62,22 +64,21 @@ export const usePeopleStore = defineStore(`${MODEL}-store`, () => {
       {
         label: "Ciudad",
         field: "city",
+        type: "callback",
       },
       {
         label: "Estado civil",
         field: "marital_status",
+        type: "callback",
       },
       {
         label: "Ocupación",
         field: "occupation",
+        type: "callback",
       },
       {
         label: "Area",
         field: "area",
-      },
-      {
-        label: "Salario",
-        field: "salary",
       },
       {
         label: "Salario",

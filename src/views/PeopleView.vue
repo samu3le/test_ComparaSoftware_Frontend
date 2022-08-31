@@ -18,10 +18,22 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue";
+
 import Table from "@/components/people/Table.vue";
 import Form from "@/components/people/Form.vue";
+
+import { useConfigStore } from "@/stores/config.js";
+
+const configStore = useConfigStore();
+
+const { getAll } = configStore;
 
 const save = async (data) => {
   console.log("save", data);
 };
+
+onMounted(() => {
+  getAll();
+});
 </script>

@@ -18,7 +18,7 @@
     </select>
   </div>
   <div class="table">
-    <table>
+    <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th v-for="column in columns" :key="column.field">

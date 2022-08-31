@@ -8,9 +8,30 @@
     @update-page="updatePage"
   >
     <template v-slot:callback="{ data, field, row }">
-      <template v-if="field === 'is_active'">
-        <span v-if="data">Activo</span>
-        <span v-else>Inactivo</span>
+      <template v-if="field === 'type_document'">
+        {{ configGetAllState.data.type_documents?.[data] }}
+      </template>
+      <template v-else-if="field === 'gender'">
+        {{ configGetAllState.data.gender?.[data] }}
+      </template>
+      <template v-else-if="field === 'city'">
+        {{ configGetAllState.data.cities?.[data] }}
+      </template>
+      <template v-else-if="field === 'marital_status'">
+        {{ configGetAllState.data.marital_status?.[data] }}
+      </template>
+      <template v-else-if="field === 'occupation'">
+        {{ configGetAllState.data.occupations?.[data] }}
+      </template>
+      <template v-else-if="field === 'is_active'">
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            :checked="data"
+            @change="toggleActive(row.id, data)"
+          />
+        </div>
       </template>
       <template v-else-if="field === 'actions'">
         <Button
@@ -43,18 +64,35 @@ import Button from "@/components/Button.vue";
 import alerts from "@/plugins/alerts.js";
 
 import { usePeopleStore } from "@/stores/people.js";
+import { useConfigStore } from "@/stores/config.js";
 
 const alert = alerts();
 
 const peopleStore = usePeopleStore();
+const configStore = useConfigStore();
 
 const { getAllState } = storeToRefs(peopleStore);
 const { getAll, updatePerPage, updatePage, formSetState } = peopleStore;
+
+const { getAllState: configGetAllState } = configStore;
 
 const edit = (row) => {
   formSetState({
     data: row,
   });
+};
+
+const toggleActive = async (id, data) => {
+  try {
+    await peopleStore.save({
+      data: {
+        id,
+        is_active: !data,
+      },
+    });
+  } catch (error) {
+    alert.error(error.message);
+  }
 };
 
 const deleteItem = async (row) => {
