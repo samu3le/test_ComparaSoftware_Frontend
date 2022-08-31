@@ -1,10 +1,10 @@
 <template>
   <div class="about">
-    <div>
-      <h1>People</h1>
-      <p>This is the people page.</p>
-    </div>
     <div class="container">
+      <div>
+        <h1>People</h1>
+        <p>This is the people page.</p>
+      </div>
       <div class="row">
         <div class="col-12 p-5">
           <Form @save="save" />
